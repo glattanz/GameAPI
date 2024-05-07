@@ -3,7 +3,7 @@ using System.Globalization;
 
 namespace GameAPI.Utilities
 {
-    public class SQLReaderExtensions
+    public static class SQLReaderExtensions
     {
         public static string GetString(this IDataRecord reader, string fieldName)
         {
