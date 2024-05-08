@@ -1,6 +1,13 @@
+using GameAPI.Persistence;
+
 var builder = WebApplication.CreateBuilder(args);
 
+var connectionString = builder.Configuration.GetConnectionString("GamesDatabase");
+
+var repository = new Repository(connectionString);
+
 // Add services to the container.
+builder.Services.AddScoped<IRepository, Repository>((provider) => repository);
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
