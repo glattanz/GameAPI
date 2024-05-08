@@ -3,7 +3,7 @@ using System.Data;
 
 namespace GameAPI.Utilities
 {
-    public class SQLExtensions
+    public static class SQLExtensions
     {
         public static SqlConnection CreateOpenConnection(this string connectionString)
         {
