@@ -37,19 +37,46 @@ namespace GameAPI.Controllers
         [HttpPut]
         public IActionResult Update(Game game)
         {
-            return Ok(_persistence.Games.Update(game));
+            return Ok(_persistence.Games.Update(
+                game.Id,
+                game.Title,
+                game.Description,
+                game.Genre,
+                game.DeveloperId,
+                game.PublisherId,
+                game.Rating,
+                game.ReleaseDate,
+                game.IsAvaliable,
+                game.Size,
+                game.Tags,
+                game.Subgenres,
+                game.AvaliableLanguages,
+                game.AvaliablePlatforms));
         }
 
         [HttpPost]
         public IActionResult Post(Game game)
         {
-            return Ok(_persistence.Games.Create(game));
+            return Ok(_persistence.Games.Create(
+                game.Title,
+                game.Description,
+                game.Genre,
+                game.DeveloperId,
+                game.PublisherId,
+                game.Rating,
+                game.ReleaseDate,
+                game.IsAvaliable,
+                game.Size,
+                game.Tags,
+                game.Subgenres,
+                game.AvaliableLanguages,
+                game.AvaliablePlatforms));
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            _persistence.Games.Delete(id);
+            _persistence.Games.Disable(id);
 
             return Ok();
         }

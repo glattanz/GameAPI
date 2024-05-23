@@ -1,0 +1,18 @@
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE OR ALTER PROCEDURE dbo.sp_Games_Disable
+	@Id int
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	UPDATE Games SET
+        IsAvaliable = 0
+    WHERE Id = @Id
+    
+END

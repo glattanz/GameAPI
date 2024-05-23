@@ -12,5 +12,5 @@ dotnet add package Microsoft.Data.SqlClient
 ```
 2. Install the Newtonsoft.Json package:
 ```bash
-dotnet add package Microsoft.Data.SqlClient
+NuGet\Install-Package Newtonsoft.Json -Version 13.0.3
 ```

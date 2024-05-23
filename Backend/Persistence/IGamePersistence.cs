@@ -6,12 +6,39 @@ namespace GameAPI.Persistence
     {
         public IEnumerable<Game> List();
 
-        public Game Create(Game game);
+        public Game Create(
+            string title,
+            string description,
+            string genre,
+            int developerId,
+            int publisherId,
+            double? rating,
+            DateTime releaseDate,
+            bool? isAvaliable,
+            double size,
+            List<string> tags,
+            List<string> subgenres,
+            List<string> avaliableLanguages,
+            List<string> avaliablePlatforms);
 
         public Game Get(int id);
 
-        public Game Update(Game game);
+        public Game Update(
+            int id,
+            string title,
+            string description,
+            string genre,
+            int developerId,
+            int publisherId,
+            double rating,
+            DateTime releaseDate,
+            bool isAvaliable,
+            double size,
+            List<string> tags,
+            List<string> subgenres,
+            List<string> avaliableLanguages,
+            List<string> avaliablePlatforms);
 
-        public void Delete(int id);
+        public Game Disable(int id);
     }
 }
