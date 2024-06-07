@@ -18,7 +18,7 @@ namespace GameAPI.Persistence
 
         public Game Get(int id);
 
-        public Game Update(
+        public Game Update( 
             int id,
             string title,
             string description,

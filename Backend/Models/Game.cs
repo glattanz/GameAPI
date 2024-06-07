@@ -21,7 +21,7 @@ namespace GameAPI.Models
             Id = id;
             Title = title;
             Description = description;
-            GenreId = genre;
+            GenreId = genreId;
             DeveloperId = developerId;
             PublisherId = publisherId;
             Rating = rating;
