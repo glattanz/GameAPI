@@ -4,7 +4,11 @@ namespace GameAPI.Persistence
 {
     public interface IGamePersistence
     {
+        public Game Get(int id);
+
         public IEnumerable<Game> List();
+
+        public Game Disable(int id);
 
         public Game Create(
             string title,
@@ -15,8 +19,6 @@ namespace GameAPI.Persistence
             double? rating,
             DateTime releaseDate,
             bool? isAvaliable);
-
-        public Game Get(int id);
 
         public Game Update( 
             int id,
@@ -29,6 +31,6 @@ namespace GameAPI.Persistence
             DateTime releaseDate,
             bool isAvaliable);
 
-        public Game Disable(int id);
+        public Game AddTag(int tagId);
     }
 }

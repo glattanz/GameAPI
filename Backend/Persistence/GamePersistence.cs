@@ -1,5 +1,6 @@
 ﻿using GameAPI.Models;
 using GameAPI.Utilities;
+
 namespace GameAPI.Persistence
 {
     public class GamePersistence : IGamePersistence
@@ -9,6 +10,53 @@ namespace GameAPI.Persistence
         public GamePersistence(string connectionString)
         {
             _connectionString = connectionString;
+        }
+
+        public Game Get(int id)
+        {
+            using var connection = _connectionString.CreateOpenConnection();
+            var command = connection.CreateCommand(System.Data.CommandType.StoredProcedure, "dbo.sp_Games_Get");
+
+            command.CreateIntInputParameter("@Id", id);
+
+            var reader = command.ExecuteReader();
+
+            if (reader.Read())
+            {
+                return Game.Create(reader);
+            }
+
+            return null;
+        }
+
+        public IEnumerable<Game> List()
+        {
+            using var connection = _connectionString.CreateOpenConnection();
+            var command = connection.CreateCommand(System.Data.CommandType.StoredProcedure, "dbo.sp_Games_List");
+
+            var reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                yield return Game.Create(reader);
+            }
+        }
+
+        public Game Disable(int id)
+        {
+            using var connection = _connectionString.CreateOpenConnection();
+            var command = connection.CreateCommand(System.Data.CommandType.StoredProcedure, "dbo.sp_Games_Disable");
+
+            command.CreateIntInputParameter("@Id", id);
+
+            var reader = command.ExecuteReader();
+
+            if (reader.Read())
+            {
+                return Game.Create(reader);
+            }
+
+            return null;
         }
 
         public Game Create(
@@ -43,53 +91,6 @@ namespace GameAPI.Persistence
             return null;
         }
 
-        public Game Disable(int id)
-        {
-            using var connection = _connectionString.CreateOpenConnection();
-            var command = connection.CreateCommand(System.Data.CommandType.StoredProcedure, "dbo.sp_Games_Disable");
-
-            command.CreateIntInputParameter("@Id", id);
-
-            var reader = command.ExecuteReader();
-
-            if (reader.Read())
-            {
-                return Game.Create(reader);
-            }
-
-            return null;
-        }
-
-        public Game Get(int id)
-        {
-            using var connection = _connectionString.CreateOpenConnection();
-            var command = connection.CreateCommand(System.Data.CommandType.StoredProcedure, "dbo.sp_Games_Get");
-
-            command.CreateIntInputParameter("@Id", id);
-
-            var reader = command.ExecuteReader();
-
-            if (reader.Read())
-            {
-                return Game.Create(reader);
-            }
-
-            return null;
-        }
-
-        public IEnumerable<Game> List()
-        {
-            using var connection = _connectionString.CreateOpenConnection();
-            var command = connection.CreateCommand(System.Data.CommandType.StoredProcedure, "dbo.sp_Games_List");
-
-            var reader = command.ExecuteReader();
-
-            while (reader.Read())
-            {
-                yield return Game.Create(reader);
-            }
-        }
-
         public Game Update(
             int id,
             string title,
@@ -113,6 +114,23 @@ namespace GameAPI.Persistence
             command.CreateDoubleInputParameter("@Rating", rating);
             command.CreateDateTimeInputParameter("@ReleaseDate", releaseDate);
             command.CreateBooleanInputParameter("@IsAvaliable", isAvaliable );
+
+            var reader = command.ExecuteReader();
+
+            if (reader.Read())
+            {
+                return Game.Create(reader);
+            }
+
+            return null;
+        }
+
+        public Game AddTag(int tagId)
+        {
+            using var connection = _connectionString.CreateOpenConnection();
+            var command = connection.CreateCommand(System.Data.CommandType.StoredProcedure, "dbo.sp_Games_AddTag");
+
+            command.CreateIntInputParameter("@TagId", tagId);
 
             var reader = command.ExecuteReader();
 

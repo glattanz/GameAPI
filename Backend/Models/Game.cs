@@ -16,7 +16,8 @@ namespace GameAPI.Models
             int publisherId,
             float rating,
             DateTime releaseDate,
-            bool isAvaliable)
+            bool isAvaliable,
+            List<Tag> tags)
         {
             Id = id;
             Title = title;
@@ -27,6 +28,7 @@ namespace GameAPI.Models
             Rating = rating;
             ReleaseDate = releaseDate;
             IsAvaliable = isAvaliable;
+            tags = tags;
         }
 
         public int Id { get; }
@@ -38,6 +40,7 @@ namespace GameAPI.Models
         public float Rating { get; }
         public DateTime ReleaseDate { get; }
         public bool IsAvaliable { get; }
+        public IEnumerable<Tag> Tags { get; }
 
         public static Game Create(IDataRecord reader)
         {
@@ -45,6 +48,11 @@ namespace GameAPI.Models
             {
                 throw new ArgumentNullException("reader");
             }
+
+            var tagsJSON = reader.GetString("Tags");
+            var tags = string.IsNullOrEmpty(tagsJSON)
+                ? new List<Tag>()
+                : JsonConvert.DeserializeObject<List<Tag>>(tagsJSON);
 
             return new Game(
                 reader.GetInt32("Id"),
@@ -55,7 +63,8 @@ namespace GameAPI.Models
                 reader.GetInt32("PublisherId"),
                 reader.GetFloat("Rating"),
                 reader.GetDateTime("ReleaseDate"),
-                reader.GetBooleanFromBit("IsAvaliable"));
+                reader.GetBooleanFromBit("IsAvaliable"),
+                tags);
         }
     }
 }
