@@ -14,17 +14,12 @@ BEGIN
 		Id,
         Title,
         [Description],
-        Genre,
+        GenreId,
         DeveloperId,
         PublisherId,
         Rating,
         ReleaseDate,
-        IsAvaliable,
-        [Size],
-        Tags,
-        Subgenres,
-        AvaliableLanguages,
-        AvaliablePlatforms
+        IsAvaliable
     FROM Games WITH(NOLOCK)
 
 END

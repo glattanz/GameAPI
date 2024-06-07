@@ -12,7 +12,15 @@ BEGIN
 	SET NOCOUNT ON;
 
 	SELECT
-		*
+		Id,
+        Title,
+        [Description],
+        GenreId,
+        DeveloperId,
+        PublisherId,
+        Rating,
+        ReleaseDate,
+        IsAvaliable
     FROM Games WITH(NOLOCK)
     WHERE Id = @Id
     

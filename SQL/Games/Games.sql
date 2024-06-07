@@ -15,17 +15,12 @@ CREATE TABLE dbo.Games
     Id int IDENTITY(1,1) NOT NULL,
     Title nvarchar(256) NOT NULL,
 	[Description] nvarchar(max) NOT NULL,
-	Genre nvarchar(256) NOT NULL,
+	GenreId int NOT NULL,
 	DeveloperId int NOT NULL,
 	PublisherId int NOT NULL,
 	Rating float NOT NULL DEFAULT 0,
 	ReleaseDate datetime NOT NULL,
-    IsAvaliable bit NOT NULL DEFAULT 1,
-	[Size] float NOT NULL,
-	Tags nvarchar(max) NULL,
-	Subgenres nvarchar(max) NULL,
-	AvaliableLanguages nvarchar(max) NULL,
-	AvaliablePlatforms nvarchar(max) NULL
+    IsAvaliable bit NOT NULL DEFAULT 1
 ) ON [PRIMARY]
 
 ALTER TABLE dbo.Games ADD CONSTRAINT PK_Games PRIMARY KEY CLUSTERED

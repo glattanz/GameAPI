@@ -7,17 +7,12 @@ GO
 CREATE OR ALTER PROCEDURE dbo.sp_Games_Create
 	@Title nvarchar(256),
     @Description nvarchar(max),
-    @Genre nvarchar(256),
+    @GenreId int,
     @DeveloperId int,
     @PublisherId int,
     @Rating int = 0,
     @ReleaseDate datetime,
-    @IsAvaliable bit,
-    @Size float,
-    @Tags nvarchar(max) = '',
-    @Subgenres nvarchar(max) = '',
-    @AvaliableLanguages nvarchar(max) = '',
-    @AvaliablePlatforms nvarchar(max) = ''
+    @IsAvaliable bit
 
 AS
 BEGIN
@@ -29,31 +24,21 @@ BEGIN
     INSERT INTO Games
     (Title,
      [Description],
-     Genre,
+     GenreId,
      DeveloperId,
      PublisherId,
      Rating,
      ReleaseDate,
-     IsAvaliable,
-     [Size],
-     Tags,
-     Subgenres,
-     AvaliableLanguages,
-     AvaliablePlatforms)
+     IsAvaliable)
     VALUES
     (@Title,
      @Description,
-     @Genre,
+     @GenreId,
      @DeveloperId,
      @PublisherId,
      @Rating,
      @ReleaseDate,
-     @IsAvaliable,
-     @Size,
-     @Tags,
-     @Subgenres,
-     @AvaliableLanguages,
-     @AvaliablePlatforms)
+     @IsAvaliable)
     
 	SET @id = @@IDENTITY
 
@@ -61,17 +46,12 @@ BEGIN
 		Id,
         Title,
         [Description],
-        Genre,
+        GenreId,
         DeveloperId,
         PublisherId,
         Rating,
         ReleaseDate,
-        IsAvaliable,
-        [Size],
-        Tags,
-        Subgenres,
-        AvaliableLanguages,
-        AvaliablePlatforms
+        IsAvaliable
     FROM Games WITH(NOLOCK)
     WHERE Id = @id
     

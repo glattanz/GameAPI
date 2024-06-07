@@ -8,17 +8,12 @@ CREATE OR ALTER PROCEDURE dbo.sp_Games_Update
     @Id int,
 	@Title nvarchar(256),
     @Description nvarchar(max),
-    @Genre nvarchar(256),
+    @GenreId int,
     @DeveloperId int,
     @PublisherId int,
     @Rating float,
     @ReleaseDate datetime,
-    @IsAvaliable bit,
-    @Size float,
-    @Tags nvarchar(max) = '',
-    @Subgenres nvarchar(max) = '',
-    @AvaliableLanguages nvarchar(max) = '',
-    @AvaliablePlatforms nvarchar(max) = ''
+    @IsAvaliable bit
 
 AS
 BEGIN
@@ -28,34 +23,24 @@ BEGIN
     UPDATE Games SET
      Title = @Title,
      [Description] = @Description,
-     Genre = @Genre,
+     GenreId = @GenreId,
      DeveloperId = @DeveloperId,
      PublisherId = @PublisherId,
      Rating = @Rating,
      ReleaseDate = @ReleaseDate,
-     IsAvaliable = @IsAvaliable,
-     [Size] = @Size,
-     Tags = @Tags,
-     Subgenres =  @Subgenres,
-     AvaliableLanguages = @AvaliableLanguages,
-     AvaliablePlatforms = @AvaliablePlatforms
+     IsAvaliable = @IsAvaliable
     WHERE Id = @Id
 
 	SELECT
 		Id,
         Title,
         [Description],
-        Genre,
+        GenreId,
         DeveloperId,
         PublisherId,
         Rating,
         ReleaseDate,
-        IsAvaliable,
-        [Size],
-        Tags,
-        Subgenres,
-        AvaliableLanguages,
-        AvaliablePlatforms
+        IsAvaliable
     FROM Games WITH(NOLOCK)
     WHERE Id = @Id
     

@@ -9,17 +9,12 @@ namespace GameAPI.Persistence
         public Game Create(
             string title,
             string description,
-            string genre,
+            int genreId,
             int developerId,
             int publisherId,
             double? rating,
             DateTime releaseDate,
-            bool? isAvaliable,
-            double size,
-            List<string> tags,
-            List<string> subgenres,
-            List<string> avaliableLanguages,
-            List<string> avaliablePlatforms);
+            bool? isAvaliable);
 
         public Game Get(int id);
 
@@ -27,17 +22,12 @@ namespace GameAPI.Persistence
             int id,
             string title,
             string description,
-            string genre,
+            int genreId,
             int developerId,
             int publisherId,
             double rating,
             DateTime releaseDate,
-            bool isAvaliable,
-            double size,
-            List<string> tags,
-            List<string> subgenres,
-            List<string> avaliableLanguages,
-            List<string> avaliablePlatforms);
+            bool isAvaliable);
 
         public Game Disable(int id);
     }
