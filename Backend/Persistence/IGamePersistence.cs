@@ -32,5 +32,7 @@ namespace GameAPI.Persistence
             bool isAvaliable);
 
         public Game AddTag(int tagId);
+
+        public Game AddSubgenre(int genreId);
     }
 }

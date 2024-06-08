@@ -7,7 +7,7 @@ namespace GameAPI.Models
     public class Game
     {
         [JsonConstructor]
-        public Game(
+        private Game(
             int id,
             string title,
             string description,
@@ -17,7 +17,8 @@ namespace GameAPI.Models
             float rating,
             DateTime releaseDate,
             bool isAvaliable,
-            List<Tag> tags)
+            List<Tag> tags,
+            List<Genre> subgenres)
         {
             Id = id;
             Title = title;
@@ -28,7 +29,8 @@ namespace GameAPI.Models
             Rating = rating;
             ReleaseDate = releaseDate;
             IsAvaliable = isAvaliable;
-            tags = tags;
+            Tags = tags;
+            Subgenres = subgenres;
         }
 
         public int Id { get; }
@@ -41,6 +43,7 @@ namespace GameAPI.Models
         public DateTime ReleaseDate { get; }
         public bool IsAvaliable { get; }
         public IEnumerable<Tag> Tags { get; }
+        public IEnumerable<Genre> Subgenres { get; }
 
         public static Game Create(IDataRecord reader)
         {
@@ -54,6 +57,11 @@ namespace GameAPI.Models
                 ? new List<Tag>()
                 : JsonConvert.DeserializeObject<List<Tag>>(tagsJSON);
 
+            var subgenresJSON = reader.GetString("Subgenres");
+            var subgenres = string.IsNullOrEmpty(subgenresJSON)
+                ? new List<Genre>()
+                : JsonConvert.DeserializeObject<List<Genre>>(subgenresJSON);
+
             return new Game(
                 reader.GetInt32("Id"),
                 reader.GetString("Title"),
@@ -64,7 +72,8 @@ namespace GameAPI.Models
                 reader.GetFloat("Rating"),
                 reader.GetDateTime("ReleaseDate"),
                 reader.GetBooleanFromBit("IsAvaliable"),
-                tags);
+                tags,
+                subgenres);
         }
     }
 }

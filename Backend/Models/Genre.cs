@@ -1,33 +1,33 @@
 ﻿using GameAPI.Utilities;
-using Newtonsoft.Json;
 using System.Data;
+using System.Text.Json.Serialization;
 
 namespace GameAPI.Models
 {
-    public class Tag
+    public class Genre
     {
         [JsonConstructor]
-        private Tag(
+        private Genre(
             int id,
-            string description)
+            string name)
         {
             Id = id;
-            Description = description;
+            Name = name;
         }
 
         public int Id { get; }
-        public string Description { get; }
+        public string Name { get; }
 
-        public static Tag Create(IDataRecord reader)
+        public static Genre Create(IDataRecord reader)
         {
             if (reader == null)
             {
                 throw new ArgumentNullException("reader");
             }
 
-            return new Tag(
+            return new Genre(
                 reader.GetInt32("Id"),
-                reader.GetString("Description"));
+                reader.GetString("Name"));
         }
     }
 }
