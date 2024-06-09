@@ -159,5 +159,21 @@ namespace GameAPI.Persistence
             return null;
         }
 
+        public Game AddPlatform(int tagId)
+        {
+            using var connection = _connectionString.CreateOpenConnection();
+            var command = connection.CreateCommand(System.Data.CommandType.StoredProcedure, "dbo.AddSubgenre");
+
+            command.CreateIntInputParameter("@SubgenreId", tagId);
+
+            var reader = command.ExecuteReader();
+
+            if (reader.Read())
+            {
+                return Game.Create(reader);
+            }
+
+            return null;
+        }
     }
 }

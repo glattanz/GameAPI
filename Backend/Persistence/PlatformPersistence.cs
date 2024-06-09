@@ -3,19 +3,19 @@ using GameAPI.Utilities;
 
 namespace GameAPI.Persistence
 {
-    public class GenrePersistence : IGenrePersistence
+    public class PlatformPersistence : IPlatformPersistence
     {
         private readonly string _connectionString;
 
-        public GenrePersistence(string connectionString)
+        public PlatformPersistence(string connectionString)
         {
             _connectionString = connectionString;
         }
 
-        public Genre Get(int id)
+        public Platform Get(int id)
         {
             using var connection = _connectionString.CreateOpenConnection();
-            var command = connection.CreateCommand(System.Data.CommandType.StoredProcedure, "dbo.sp_Genres_Get");
+            var command = connection.CreateCommand(System.Data.CommandType.StoredProcedure, "dbo.sp_Platforms_Get");
 
             command.CreateIntInputParameter("@Id", id);
 
@@ -23,29 +23,29 @@ namespace GameAPI.Persistence
 
             if (reader.Read())
             {
-                return Genre.Create(reader);
+                return Platform.Create(reader);
             }
 
             return null;
         }
 
-        public IEnumerable<Genre> List()
+        public IEnumerable<Platform> List()
         {
             using var connection = _connectionString.CreateOpenConnection();
-            var command = connection.CreateCommand(System.Data.CommandType.StoredProcedure, "dbo.sp_Genres_List");
+            var command = connection.CreateCommand(System.Data.CommandType.StoredProcedure, "dbo.sp_Platforms_List");
 
             var reader = command.ExecuteReader();
 
             while (reader.Read())
             {
-                yield return Genre.Create(reader);
+                yield return Platform.Create(reader);
             }
         }
 
-        public Genre Create(string name)
+        public Platform Create(string name)
         {
             using var connection = _connectionString.CreateOpenConnection();
-            var command = connection.CreateCommand(System.Data.CommandType.StoredProcedure, "dbo.sp_Genres_Create");
+            var command = connection.CreateCommand(System.Data.CommandType.StoredProcedure, "dbo.sp_Platforms_Create");
 
             command.CreateStringInputParameter("@Name", name);
 
@@ -53,16 +53,16 @@ namespace GameAPI.Persistence
 
             if (reader.Read())
             {
-                return Genre.Create(reader);
+                return Platform.Create(reader);
             }
 
             return null;
         }
 
-        public Genre Delete(int id)
+        public Platform Delete(int id)
         {
             using var connection = _connectionString.CreateOpenConnection();
-            var command = connection.CreateCommand(System.Data.CommandType.StoredProcedure, "dbo.sp_Genres_Delete");
+            var command = connection.CreateCommand(System.Data.CommandType.StoredProcedure, "dbo.sp_Platforms_Delete");
 
             command.CreateIntInputParameter("@Id", id);
 
@@ -70,18 +70,18 @@ namespace GameAPI.Persistence
 
             if (reader.Read())
             {
-                return Genre.Create(reader);
+                return Platform.Create(reader);
             }
 
             return null;
         }
 
-        public Genre Update(
+        public Platform Update(
             int id,
             string name)
         {
             using var connection = _connectionString.CreateOpenConnection();
-            var command = connection.CreateCommand(System.Data.CommandType.StoredProcedure, "dbo.sp_Genres_Update");
+            var command = connection.CreateCommand(System.Data.CommandType.StoredProcedure, "dbo.sp_Platforms_Update");
 
             command.CreateIntInputParameter("@Id", id);
             command.CreateStringInputParameter("@Name", name);
@@ -90,7 +90,7 @@ namespace GameAPI.Persistence
 
             if (reader.Read())
             {
-                return Genre.Create(reader);
+                return Platform.Create(reader);
             }
 
             return null;

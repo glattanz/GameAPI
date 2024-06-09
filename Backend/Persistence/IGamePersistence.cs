@@ -34,5 +34,7 @@ namespace GameAPI.Persistence
         public Game AddTag(int tagId);
 
         public Game AddSubgenre(int genreId);
+
+        public Game AddPlatform(int platformId);
     }
 }

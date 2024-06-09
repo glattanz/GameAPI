@@ -41,17 +41,12 @@ namespace GameAPI.Controllers
                 game.Id,
                 game.Title,
                 game.Description,
-                game.Genre,
+                game.GenreId,
                 game.DeveloperId,
                 game.PublisherId,
                 game.Rating,
                 game.ReleaseDate,
-                game.IsAvaliable,
-                game.Size,
-                game.Tags,
-                game.Subgenres,
-                game.AvaliableLanguages,
-                game.AvaliablePlatforms));
+                game.IsAvaliable));
         }
 
         [HttpPost]
@@ -60,21 +55,16 @@ namespace GameAPI.Controllers
             return Ok(_persistence.Games.Create(
                 game.Title,
                 game.Description,
-                game.Genre,
+                game.GenreId,
                 game.DeveloperId,
                 game.PublisherId,
                 game.Rating,
                 game.ReleaseDate,
-                game.IsAvaliable,
-                game.Size,
-                game.Tags,
-                game.Subgenres,
-                game.AvaliableLanguages,
-                game.AvaliablePlatforms));
+                game.IsAvaliable));
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public IActionResult Disable(int id)
         {
             _persistence.Games.Disable(id);
 

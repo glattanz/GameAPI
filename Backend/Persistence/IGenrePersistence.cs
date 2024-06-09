@@ -8,8 +8,7 @@ namespace GameAPI.Persistence
 
         public IEnumerable<Genre> List();
 
-        public Genre Create(
-            string name);
+        public Genre Create(string name);
         
         public Genre Delete(int id);
 
