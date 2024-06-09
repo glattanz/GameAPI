@@ -1,0 +1,45 @@
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+IF EXISTS (SELECT 1 FROM SysObjects WHERE Name = 'GamePlatforms')
+BEGIN
+	RETURN
+END
+GO
+
+CREATE TABLE dbo.GamePlatforms
+(
+    GameId int NOT NULL,
+    PlatformId int NOT NULL
+) ON [PRIMARY]
+GO
+
+ALTER TABLE dbo.GamePlatforms ADD CONSTRAINT PK_GamePlatforms PRIMARY KEY CLUSTERED
+(
+    GameId ASC,
+    PlatformId ASC
+)
+WITH (
+    PAD_INDEX = OFF,
+    STATISTICS_NORECOMPUTE = OFF,
+    SORT_IN_TEMPDB = OFF,
+    IGNORE_DUP_KEY = OFF,
+    ONLINE = OFF,
+    ALLOW_ROW_LOCKS = ON,
+    ALLOW_PAGE_LOCKS = ON
+) ON [PRIMARY]
+GO
+
+ALTER TABLE dbo.GamePlatforms ADD CONSTRAINT FK_GamePlatforms_Games FOREIGN KEY (GameId)
+REFERENCES dbo.Games(Id)
+ON DELETE CASCADE
+GO
+
+ALTER TABLE dbo.GamePlatforms ADD CONSTRAINT FK_GamePlatforms_Platforms FOREIGN KEY (PlatformId)
+REFERENCES dbo.Platforms(Id)
+ON DELETE CASCADE
+GO
