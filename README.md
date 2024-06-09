@@ -14,3 +14,7 @@ dotnet add package Microsoft.Data.SqlClient
 ```bash
 NuGet\Install-Package Newtonsoft.Json -Version 13.0.3
 ```
+
+## Backend Diagram:
+
+![Backend Diagram](diagram.png)
