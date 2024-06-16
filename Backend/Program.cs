@@ -1,10 +1,18 @@
 using GameAPI.Persistence;
+using GameAPI.Utilities;
 
 var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration.GetConnectionString("GamesDatabase");
 
 var repository = new Repository(connectionString);
+
+var projectRootPath = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.Parent.Parent.FullName;
+var scriptsPath = Path.Combine(projectRootPath, "SQL");
+var configFilePath = Path.Combine(projectRootPath, "SQL", "migrations.json");
+
+var migrationRunner = new MigrationRunner(connectionString, scriptsPath, configFilePath);
+migrationRunner.RunMigrations();
 
 // Add services to the container.
 builder.Services.AddScoped<IRepository, Repository>((provider) => repository);
