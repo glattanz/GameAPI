@@ -5,12 +5,12 @@ using Microsoft.AspNetCore.Mvc;
 namespace GameAPI.Controllers
 {
     [ApiController]
-    [Route("platforms")]
-    public class PlatformController : ControllerBase
+    [Route("languages")]
+    public class LanguageController : ControllerBase
     {
         private readonly IRepository _persistence;
 
-        public PlatformController(IRepository persistence)
+        public LanguageController(IRepository persistence)
         {
             _persistence = persistence;
         }
@@ -18,13 +18,13 @@ namespace GameAPI.Controllers
         [HttpGet]
         public IActionResult List()
         {
-            return Ok(_persistence.Platforms.List());
+            return Ok(_persistence.Languages.List());
         }
 
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            var game = _persistence.Platforms.Get(id);
+            var game = _persistence.Languages.Get(id);
 
             if (game == null)
             {
@@ -35,24 +35,24 @@ namespace GameAPI.Controllers
         }
 
         [HttpPut]
-        public IActionResult Update(Platform platform)
+        public IActionResult Update(Language language)
         {
-            return Ok(_persistence.Platforms.Update(
-                platform.Id,
-                platform.Name));
+            return Ok(_persistence.Languages.Update(
+                language.Id,
+                language.Name));
         }
 
         [HttpPost]
-        public IActionResult Post(Platform platform)
+        public IActionResult Post(Language language)
         {
-            return Ok(_persistence.Platforms.Create(
-                platform.Name));
+            return Ok(_persistence.Languages.Create(
+                language.Name));
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            _persistence.Platforms.Delete(id);
+            _persistence.Languages.Delete(id);
 
             return Ok();
         }
