@@ -8,5 +8,6 @@
         public IPlatformPersistence Platforms { get; }
         public ILanguagePersistence Languages { get; }
         public IDeveloperPersistence Developers { get; }
+        public IPublisherPersistence Publishers { get; }
     }
 }
