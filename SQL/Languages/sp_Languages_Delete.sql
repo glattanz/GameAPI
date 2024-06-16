@@ -1,0 +1,17 @@
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE OR ALTER PROCEDURE dbo.sp_Languages_Delete
+	@Id int
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	DELETE FROM Languages
+    WHERE Id = @Id
+    
+END
