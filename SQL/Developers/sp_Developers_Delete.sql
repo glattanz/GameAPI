@@ -1,0 +1,17 @@
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE OR ALTER PROCEDURE dbo.sp_Developers_Delete
+	@Id int
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	DELETE FROM Developers
+    WHERE Id = @Id
+    
+END
