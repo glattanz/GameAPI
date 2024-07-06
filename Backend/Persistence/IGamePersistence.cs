@@ -31,10 +31,20 @@ namespace GameAPI.Persistence
             DateTime releaseDate,
             bool isAvaliable);
 
-        public Game AddTag(int tagId);
+        public void AddTag(
+            int gameId,
+            int tagId);
 
-        public Game AddSubgenre(int genreId);
+        public void AddSubgenre(
+            int gameId,
+            int genreId);
 
-        public Game AddPlatform(int platformId);
+        public void AddPlatform(
+            int gameId,
+            int platformId);
+
+        public void AddLanguage(
+            int gameId,
+            int languageId);
     }
 }

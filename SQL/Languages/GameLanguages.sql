@@ -1,0 +1,40 @@
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+IF EXISTS (SELECT 1 FROM SysObjects WHERE Name = 'GameLanguages')
+BEGIN
+	--* drop table dbo.GameLanguages
+	RETURN
+END
+
+CREATE TABLE dbo.GameLanguages
+(
+    GameId int NOT NULL,
+    LanguageId int NOT NULL
+) ON [PRIMARY]
+
+ALTER TABLE dbo.GameLanguages ADD CONSTRAINT PK_GameLanguages PRIMARY KEY CLUSTERED
+(
+    GameId ASC,
+    LanguageId ASC
+)
+WITH (
+    PAD_INDEX = OFF,
+    STATISTICS_NORECOMPUTE = OFF,
+    SORT_IN_TEMPDB = OFF,
+    IGNORE_DUP_KEY = OFF,
+    ONLINE = OFF,
+    ALLOW_ROW_LOCKS = ON,
+    ALLOW_PAGE_LOCKS = ON
+) ON [PRIMARY]
+
+ALTER TABLE dbo.GameLanguages ADD CONSTRAINT FK_GameLanguages_Games FOREIGN KEY (GameId)
+REFERENCES dbo.Games(Id)
+ON DELETE CASCADE
+
+ALTER TABLE dbo.GameLanguages ADD CONSTRAINT FK_GameLanguages_Languages FOREIGN KEY (LanguageId)
+REFERENCES dbo.Languages(Id)
+ON DELETE CASCADE

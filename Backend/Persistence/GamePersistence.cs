@@ -125,55 +125,56 @@ namespace GameAPI.Persistence
             return null;
         }
 
-        public Game AddTag(int tagId)
+        public void AddTag(
+            int gameId,
+            int tagId)
         {
             using var connection = _connectionString.CreateOpenConnection();
             var command = connection.CreateCommand(System.Data.CommandType.StoredProcedure, "dbo.sp_Games_AddTag");
 
+            command.CreateIntInputParameter("@GameId", gameId);
             command.CreateIntInputParameter("@TagId", tagId);
 
-            var reader = command.ExecuteReader();
-
-            if (reader.Read())
-            {
-                return Game.Create(reader);
-            }
-
-            return null;
+            var reader = command.ExecuteNonQuery();
         }
 
-        public Game AddSubgenre(int tagId)
+        public void AddSubgenre(
+            int gameId,
+            int subgenreId)
         {
             using var connection = _connectionString.CreateOpenConnection();
-            var command = connection.CreateCommand(System.Data.CommandType.StoredProcedure, "dbo.AddSubgenre");
+            var command = connection.CreateCommand(System.Data.CommandType.StoredProcedure, "dbo.sp_Games_AddSubgenre");
 
-            command.CreateIntInputParameter("@SubgenreId", tagId);
+            command.CreateIntInputParameter("@GameId", gameId);
+            command.CreateIntInputParameter("@SubgenreId", subgenreId);
 
-            var reader = command.ExecuteReader();
-
-            if (reader.Read())
-            {
-                return Game.Create(reader);
-            }
-
-            return null;
+            var reader = command.ExecuteNonQuery();
         }
 
-        public Game AddPlatform(int tagId)
+        public void AddPlatform(
+            int gameId, 
+            int platformId)
         {
             using var connection = _connectionString.CreateOpenConnection();
-            var command = connection.CreateCommand(System.Data.CommandType.StoredProcedure, "dbo.AddSubgenre");
+            var command = connection.CreateCommand(System.Data.CommandType.StoredProcedure, "dbo.sp_Games_AddPlatform");
 
-            command.CreateIntInputParameter("@SubgenreId", tagId);
+            command.CreateIntInputParameter("@GameId", gameId);
+            command.CreateIntInputParameter("@PlatformId", platformId);
 
-            var reader = command.ExecuteReader();
+            var reader = command.ExecuteNonQuery();
+        }
 
-            if (reader.Read())
-            {
-                return Game.Create(reader);
-            }
+        public void AddLanguage(
+            int gameId, 
+            int languageId)
+        {
+            using var connection = _connectionString.CreateOpenConnection();
+            var command = connection.CreateCommand(System.Data.CommandType.StoredProcedure, "dbo.sp_Games_AddLanguage");
 
-            return null;
+            command.CreateIntInputParameter("@GameId", gameId);
+            command.CreateIntInputParameter("@LanguageId", languageId);
+
+            var reader = command.ExecuteNonQuery();
         }
     }
 }

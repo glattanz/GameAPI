@@ -6,16 +6,15 @@ GO
 
 IF EXISTS (SELECT 1 FROM SysObjects WHERE Name = 'GameTags')
 BEGIN
+	--* drop table dbo.GameTags
 	RETURN
 END
-GO
 
 CREATE TABLE dbo.GameTags
 (
     GameId int NOT NULL,
     TagId int NOT NULL
 ) ON [PRIMARY]
-GO
 
 ALTER TABLE dbo.GameTags ADD CONSTRAINT PK_GameTags PRIMARY KEY CLUSTERED
 (
@@ -31,14 +30,11 @@ WITH (
     ALLOW_ROW_LOCKS = ON,
     ALLOW_PAGE_LOCKS = ON
 ) ON [PRIMARY]
-GO
 
 ALTER TABLE dbo.GameTags ADD CONSTRAINT FK_GameTags_Games FOREIGN KEY (GameId)
 REFERENCES dbo.Games(Id)
 ON DELETE CASCADE
-GO
 
 ALTER TABLE dbo.GameTags ADD CONSTRAINT FK_GameTags_Tags FOREIGN KEY (TagId)
 REFERENCES dbo.Tags(Id)
 ON DELETE CASCADE
-GO
