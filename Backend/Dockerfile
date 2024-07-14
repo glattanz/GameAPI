@@ -1,5 +1,5 @@
 # Use uma imagem oficial do .NET como imagem base
-FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS base
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS base
 WORKDIR /app
 EXPOSE 80
 
